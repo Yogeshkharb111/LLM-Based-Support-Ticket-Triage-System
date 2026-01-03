@@ -50,6 +50,10 @@ This project showcases several important AI and system design concepts:
 
 ## 🏗️ System Architecture
 
+![LLM Ticket Triage Architecture](<img width="1024" height="1024" alt="Gemini_Generated_Image_y8mbujy8mbujy8mb" src="https://github.com/user-attachments/assets/31b82619-0304-4bb7-a4e3-1ef2466e613d" />
+)
+
+
 ### High-Level Flow
 
 ```text
