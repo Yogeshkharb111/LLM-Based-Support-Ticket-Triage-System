@@ -149,7 +149,9 @@ This **hybrid AI approach** prevents LLM misclassification in **high-risk scenar
 
 ```
 
+```
 ▶️ How to Run the Project
+
 1️⃣ Create & Activate Virtual Environment (Windows)
 py -m venv venv
 venv\Scripts\activate
