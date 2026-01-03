@@ -68,7 +68,7 @@ Rule Engine (rules.py)
 Structured JSON Output
 
 
-
+```
 
 
 graph TD
@@ -79,8 +79,6 @@ graph TD
     E --> F[Rule Engine<br/>rules.py]
     F --> G[Structured JSON Output]
 
-
-```
 
 ticket_triage/
 │── main.py            # CLI entry point
