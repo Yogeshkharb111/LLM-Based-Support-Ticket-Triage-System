@@ -6,7 +6,7 @@ a mock fallback response when API quota is exceeded
 or API access is unavailable.
 """
 
-from typing import Dict
+from typing import Dict, List
 import os
 
 
@@ -22,12 +22,6 @@ def analyze_ticket_with_llm(ticket: str) -> Dict:
     - If API key is missing or quota is exceeded,
       this function raises an exception.
     - main.py will automatically fall back to mock_llm_response().
-
-    Args:
-        ticket (str): Raw support ticket text
-
-    Returns:
-        dict: Structured LLM response
     """
 
     api_key = os.getenv("OPENAI_API_KEY")
@@ -36,10 +30,41 @@ def analyze_ticket_with_llm(ticket: str) -> Dict:
     if not api_key:
         raise RuntimeError("OpenAI API key not found or quota exceeded")
 
-    # 👉 PLACEHOLDER for real OpenAI call
-    # (You can integrate OpenAI/Gemini later)
-
+    # Placeholder for real LLM integration
     raise RuntimeError("Simulated API quota exceeded")
+
+
+# ----------------------------------
+# URGENCY INDICATOR EXTRACTION
+# ----------------------------------
+
+def extract_urgency_indicators(ticket: str) -> List[str]:
+    """
+    Extracts urgency-related phrases from the raw ticket text.
+    These indicators help explain why a ticket was prioritized.
+    """
+
+    KEYWORDS = [
+        "urgent",
+        "payment failed",
+        "payment failed multiple times",
+        "account locked",
+        "crash",
+        "error",
+        "system down",
+        "unable to login",
+        "security breach",
+        "data loss"
+    ]
+
+    indicators = []
+    ticket_lower = ticket.lower()
+
+    for keyword in KEYWORDS:
+        if keyword in ticket_lower:
+            indicators.append(keyword)
+
+    return indicators
 
 
 # ----------------------------------
@@ -53,6 +78,7 @@ def mock_llm_response(ticket: str) -> Dict:
     """
 
     ticket_lower = ticket.lower()
+    urgency_indicators = extract_urgency_indicators(ticket)
 
     if "payment" in ticket_lower:
         return {
@@ -60,7 +86,7 @@ def mock_llm_response(ticket: str) -> Dict:
             "priority": "High",
             "issue_summary": "Payment related issue",
             "impacted_module": "Payments",
-            "urgency_indicators": [],
+            "urgency_indicators": urgency_indicators,
             "suggested_next_action": "Check payment logs",
             "reasoning": "Mock LLM classification based on payment-related keywords."
         }
@@ -71,7 +97,7 @@ def mock_llm_response(ticket: str) -> Dict:
             "priority": "High",
             "issue_summary": "Application crash issue",
             "impacted_module": "Mobile App",
-            "urgency_indicators": [],
+            "urgency_indicators": urgency_indicators,
             "suggested_next_action": "Investigate app crash logs",
             "reasoning": "Mock LLM classification based on crash/error keywords."
         }
@@ -82,7 +108,7 @@ def mock_llm_response(ticket: str) -> Dict:
             "priority": "Low",
             "issue_summary": "User feedback",
             "impacted_module": "General",
-            "urgency_indicators": [],
+            "urgency_indicators": urgency_indicators,
             "suggested_next_action": "Send appreciation response",
             "reasoning": "Mock LLM classification for non-issue feedback."
         }
@@ -93,7 +119,7 @@ def mock_llm_response(ticket: str) -> Dict:
             "priority": "Medium",
             "issue_summary": "General inquiry",
             "impacted_module": "Support",
-            "urgency_indicators": [],
+            "urgency_indicators": urgency_indicators,
             "suggested_next_action": "Respond with help article",
             "reasoning": "Mock LLM classification for general inquiry."
         }
