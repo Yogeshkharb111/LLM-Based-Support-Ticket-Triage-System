@@ -71,15 +71,8 @@ Structured JSON Output
 ```
 
 
-graph TD
-    A[User / Support Agent] --> B[CLI Interface<br/>main.py]
-    B --> C[LLM Client<br/>llm_client.py]
-    C --> D[OpenAI LLM]
-    D --> E[Validation Layer<br/>utils.py]
-    E --> F[Rule Engine<br/>rules.py]
-    F --> G[Structured JSON Output]
 
-
+```
 ticket_triage/
 │── main.py            # CLI entry point
 │── llm_client.py      # OpenAI API interaction
